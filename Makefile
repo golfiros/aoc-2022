@@ -12,10 +12,6 @@ BINARIES = $(patsubst $(DIR_SRC)/%, $(DIR_BIN)/%, $(wildcard $(DIR_SRC)/*))
 
 default: $(BINARIES)
 
-$(DIR_BIN)/day%: $(shell find $(DIR_SRC)/$(@F) -type f)
-	$(dir_guard)
-	@$(CC) $(CFLAGS) -I$(DIR_SRC)/$(@F) -o $@ $^ $(LIBS)
-
 .PHONY: $(patsubst $(DIR_SRC)/%, /%, $(wildcard $(DIR_SRC)/*)) clean default
 
 day%: $(DIR_BIN)/day%
@@ -24,3 +20,7 @@ day%: $(DIR_BIN)/day%
 clean: 
 	@rm -rf $(DIR_BIN)
 
+.SECONDEXPANSION:
+$(DIR_BIN)/day%: $$(shell find $(DIR_SRC)/day% -type f)
+	$(dir_guard)
+	@$(CC) $(CFLAGS) -I$(DIR_SRC)/$(@F) -o $@ $^ $(LIBS)
