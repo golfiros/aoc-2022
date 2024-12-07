@@ -5,7 +5,7 @@ DIR_BIN = build
 dir_guard = @mkdir -p $(@D)
 
 CC = gcc
-CFLAGS = -g -Wpedantic
+CFLAGS = -O3 -Wpedantic -std=c23
 
 LIBS = -lm
 BINARIES = $(patsubst $(DIR_SRC)/%, $(DIR_BIN)/%, $(wildcard $(DIR_SRC)/*))
